@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site site="http://www.c-spanarchives.org/*"
+		plugin="http://www.c-spanarchives.org/flash/*"
+		initialState="playing"
+		version="1.0">
+	<crop x="25" y="48" width="312" height="211" />
+	<state name="playing">
+		
+	</state>
+
+</site>	

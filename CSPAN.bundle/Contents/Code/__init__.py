@@ -44,7 +44,7 @@ def MainMenu():
   dir = MediaContainer()
   
   dir.Append(Function(DirectoryItem(Live,      title="C-SPAN Channel Live Sreams",)))
-  dir.Append(Function(DirectoryItem(Library,   title="C-SPAN Video Library",)))
+  dir.Append(Function(DirectoryItem(Library,   title="C-SPAN Video Library", thumb=R('libr.jpg'))))
 # dir.Append(Function(DirectoryItem(Congress,  title="C-SPAN Congressional Chronicle",)))
 # dir.Append(Function(DirectoryItem(Schedule,  title="C-SPAN Broadcast Schedule",)))
   return dir
@@ -82,9 +82,9 @@ def Library(sender):
 	dir.Append(Function(DirectoryItem(GetVids,      title='Featured Programs'), page=frontURL, path="id('featuredContent')/table/tbody/tr/td[2]/div[2]/a/@href", title2='Featured Programs'))
 	dir.Append(Function(DirectoryItem(Categories,   title='Video Categories',)))
 	dir.Append(Function(DirectoryItem(Series,       title='Video Series',)))
-	dir.Append(Function(DirectoryItem(GetVids,      title='Obama White House'), page=frontURL, path="id('recentCampaign2008Content')//div/div/div[2]/a//@href", title2='Obama White House'))
-	dir.Append(Function(DirectoryItem(GetVids,      title='Recent Congressional Committees'), page=frontURL, path="id('recentCommitteesContent')//div/div/div[2]/a//@href", title2="Recent Congressional Committees"))
-	dir.Append(Function(DirectoryItem(GetVids,      title='Recent BookTV Programs'), page=frontURL, path="id('recentBookTVContent')//div/div/div[2]/a/@href", title2="Recent BookTV"))
+	dir.Append(Function(DirectoryItem(GetVids,      title='Obama White House', thumb=R('obama1.jpg')), page=frontURL, path="id('recentCampaign2008Content')//div/div/div[2]/a//@href", title2='Obama White House'))
+	dir.Append(Function(DirectoryItem(GetVids,      title='Recent Congressional Committees', thumb=R('committee1.jpg')), page=frontURL, path="id('recentCommitteesContent')//div/div/div[2]/a//@href", title2="Recent Congressional Committees"))
+	dir.Append(Function(DirectoryItem(GetVids,      title='Recent BookTV Programs', thumb=R('book1.jpg')), page=frontURL, path="id('recentBookTVContent')//div/div/div[2]/a/@href", title2="Recent BookTV"))
 	return dir
 
 ###########################################
@@ -148,11 +148,11 @@ def MostWatched(sender):
 def Categories(sender):
 	dir = MediaContainer(title2='Video Categories',)
 	dir.Append(Function(DirectoryItem(GetVids, title="American Profile"), page=frontURL+"&cPath=6_7", path="//table//td[3]//a//@href", title2="American Profile"))
-	dir.Append(Function(DirectoryItem(GetVids, title="Booknotes"), page=frontURL+"&cPath=6_8", path="//table//td[3]//a//@href", title2="Booknotes"))
+	dir.Append(Function(DirectoryItem(GetVids, title="Booknotes", thumb=R('book2.jpg')), page=frontURL+"&cPath=6_8", path="//table//td[3]//a//@href", title2="Booknotes"))
 	dir.Append(Function(DirectoryItem(GetVids, title="C-SPAN Special"), page=frontURL+"&cPath=6_9", path="//table//td[3]//a//@href", title2="C-SPAN Special"))
 	dir.Append(Function(DirectoryItem(GetVids, title="Call-In"), page=frontURL+"&cPath=6_10", path="//table//td[3]//a//@href", title2="Call-In"))
-	dir.Append(Function(DirectoryItem(GetVids, title="Congressional Committee"), page=frontURL+"&cPath=6_11", path="//table//td[3]//a//@href", title2="Congressional Committee"))
-	dir.Append(Function(DirectoryItem(GetVids, title="Congressional Proceeding"), page=frontURL+"&cPath=6_12", path="//table//td[3]//a//@href", title2="Congressional Proceeding"))
+	dir.Append(Function(DirectoryItem(GetVids, title="Congressional Committee", thumb=R('committee2.jpg')), page=frontURL+"&cPath=6_11", path="//table//td[3]//a//@href", title2="Congressional Committee"))
+	dir.Append(Function(DirectoryItem(GetVids, title="Congressional Proceeding", thumb=R('proceding.jpg')), page=frontURL+"&cPath=6_12", path="//table//td[3]//a//@href", title2="Congressional Proceeding"))
 	dir.Append(Function(DirectoryItem(GetVids, title="Interview"), page=frontURL+"&cPath=6_13", path="//table//td[3]//a//@href", title2="Interview"))
 	dir.Append(Function(DirectoryItem(GetVids, title="National Press Club Speech"), page=frontURL+"&cPath=6_14", path="//table//td[3]//a//@href", title2="National Press Club"))
 	dir.Append(Function(DirectoryItem(GetVids, title="News Conference"), page=frontURL+"&cPath=6_15", path="//table//td[3]//a//@href", title2="News Conference"))

@@ -4,8 +4,32 @@
 		initialState="playing"
 		version="1.0">
 	<crop x="25" y="48" width="312" height="211" />
+
+	<!-- PLAYING -->
 	<state name="playing">
-		
+	 <event>
+	  <condition>
+	   <command name="pause" />
+	  </condition>
+	  <action>
+	   <click x="105" y="305" />
+	   <goto state="paused" />
+	  </action>
+	 </event>
+	</state>
+
+
+	<!-- PAUSED -->
+	<state name="paused">
+	 <event>
+	  <condition>
+	   <command name="play" />
+	  </condition>
+	  <action>
+	   <click x="105" y="305" />
+	   <goto state="playing" />
+	  </action>
+	 </event>
 	</state>
 
 </site>	

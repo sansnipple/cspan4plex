@@ -133,8 +133,8 @@ def GetVids(sender, title2, page, path):
 					summary = summary + infos[x].text
 		#finally, append the actual WebVideoItem
 		dir.Append(WebVideoItem(videoURL + GetPID(detailsURL[y]), title=title, thumb=thumb, summary=summary))
-		#add next link to next page of results
-		nextPage = pageXML.xpath("//a[@title=' Next Page ']/@href")
+	#add next link to next page of results
+	nextPage = pageXML.xpath("//a[@title=' Next Page ']/@href")
 	if nextPage != []:
 		dir.Append(Function(DirectoryItem(GetVids, title="Next 10 Results"), page=nextPage[0]+"",  path=path, title2=title2))
 	return dir

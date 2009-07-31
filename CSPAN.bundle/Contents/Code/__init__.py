@@ -6,7 +6,6 @@
 # wait for plex fix for sticky thumbs
 # add cspan radio live
 # site config xml - seekbar crap
-# search in library
 # congressional chronicle
 #	better senate photo for cspan2 thumb
 #	more art
@@ -50,7 +49,7 @@ def MainMenu():
   dir.Append(Function(DirectoryItem(Library,   title="C-SPAN Video Library", thumb=R('libr.jpg'))))
 # dir.Append(Function(DirectoryItem(Congress,  title="C-SPAN Congressional Chronicle",)))
 # dir.Append(Function(DirectoryItem(Schedule,  title="C-SPAN Broadcast Schedule",)))
-  dir.Append(Function(InputDirectoryItem(doSearch, title="Search CSPAN Archives",prompt='Enter search query')))
+  dir.Append(Function(SearchDirectoryItem(doSearch, title="Search CSPAN Archives",prompt='Enter search query')))
   return dir
 
 ###################################################################################################

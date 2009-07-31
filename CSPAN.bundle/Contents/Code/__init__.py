@@ -6,16 +6,18 @@
 # wait for plex fix for sticky thumbs
 # add cspan radio live
 # site config xml - seekbar crap
-# figure out a way to show more that first 10 results
 # search in library
 # congressional chronicle
 #	better senate photo for cspan2 thumb
 #	more art
 # Better art
+# currently does Not return to menu automatically when video finishes, MUST find fix for this
+# use plex unversal player
 
 # direct url for library videos:
 # pid= id number of the video to play
 # http://www.c-spanarchives.org/library/includes/templates/library/flash_popup.php?pID=287153-1
+
 
 
 import re, string
@@ -26,7 +28,8 @@ from PMS.Shortcuts import *
 CSPAN_PREFIX   = "/video/C-SPAN"
 videoURL       = "http://www.c-spanarchives.org/library/includes/templates/library/flash_popup.php?pID="
 frontURL       = "http://www.c-spanarchives.org/library/index.php?main_page=index"
-
+searchDate     = "http://www.c-spanarchives.org/library/index.php?main_page=basic_search&sort=date&query="
+searchURL      = "http://www.c-spanarchives.org/library/index.php?main_page=basic_search&query="
 CACHE_INTERVAL = 3600
 
 
@@ -47,6 +50,7 @@ def MainMenu():
   dir.Append(Function(DirectoryItem(Library,   title="C-SPAN Video Library", thumb=R('libr.jpg'))))
 # dir.Append(Function(DirectoryItem(Congress,  title="C-SPAN Congressional Chronicle",)))
 # dir.Append(Function(DirectoryItem(Schedule,  title="C-SPAN Broadcast Schedule",)))
+  dir.Append(Function(InputDirectoryItem(doSearch, title="Search CSPAN Archives",prompt='Enter search query')))
   return dir
 
 ###################################################################################################
@@ -180,6 +184,24 @@ def Series(sender):
 	dir.Append(Function(DirectoryItem(GetVids, title="School Bus"), page=frontURL+"&cPath=18_29", path="//table//td[3]//a//@href", title2="School Bus"))
 	dir.Append(Function(DirectoryItem(GetVids, title="Tocqueville"), page=frontURL+"&cPath=18_30", path="//table//td[3]//a//@href", title2="Tocqueville"))
 	dir.Append(Function(DirectoryItem(GetVids, title="Washington Journal"), page=frontURL+"&cPath=18_31", path="//table//td[3]//a//@href", title2="Washington Journal"))
+	
+	return dir
+
+########################### Search Function
+
+def doSearch(sender, query):
+	dir = MediaContainer(title2="Search Results")
+	Log(query)
+	queryURL = String.URLEncode(query)
+	Log(queryURL)
+	searchPage =  searchDate + queryURL
+	Log(searchPage)
+	searchPaths = "//b//a//@href"
+	dir.Append(Function(DirectoryItem(GetVids, title="Search Results by Date, Newest first"), page=searchPage, path=searchPaths, title2="Search Results"))
+	searchPage = searchURL + queryURL + "&start=0&sort=date&reverse=false"
+	dir.Append(Function(DirectoryItem(GetVids, title="Search Results by Date, Oldest First"), page=searchPage, path=searchPaths, title2="Search Results"))
+	searchPage = searchURL + queryURL
+	dir.Append(Function(DirectoryItem(GetVids, title="Search Results by Relevancy"), page=searchPage, path=searchPaths, title2="Search Results"))
 	
 	return dir
 

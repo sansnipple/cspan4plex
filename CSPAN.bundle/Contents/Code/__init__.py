@@ -190,11 +190,8 @@ def Series(sender):
 
 def doSearch(sender, query):
 	dir = MediaContainer(title2="Search Results")
-	Log(query)
 	queryURL = String.URLEncode(query)
-	Log(queryURL)
 	searchPage =  searchDate + queryURL
-	Log(searchPage)
 	searchPaths = "//b//a//@href"
 	dir.Append(Function(DirectoryItem(GetVids, title="Search Results by Date, Newest first"), page=searchPage, path=searchPaths, title2="Search Results"))
 	searchPage = searchURL + queryURL + "&start=0&sort=date&reverse=false"

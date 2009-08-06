@@ -18,7 +18,6 @@
 #TO DO:
 #	wait for plex fix for live streams
 # wait for plex fix for sticky thumbs
-# add cspan radio live
 # site config xml - seekbar crap
 # congressional chronicle
 #	better senate photo for cspan2 thumb
@@ -90,7 +89,14 @@ def Live(sender):
 									art='',
 									summary="C-SPAN3 offers history programming and Congressional committee coverage.",
 									))
-  
+  dir.Append(TrackItem('http://play.rbn.com/play.asx?url=cspan/cspan/wmlive/cspan4db.asf',
+                  title='C-SPAN Radio Live',
+                  thumb='',
+                  art='',
+                  summary="C-SPAN Radio offers commercial-free public affairs programming 24 hours a day. You'll hear live coverage from Washington of important congressional hearings, key speeches from national leaders, along with archival recordings of presidential tapes, military memoirs & judicial proceedings from contemporary times and before the advent of television.",
+                  ))
+
+
   return dir
 
 ########################### Video Library ################################################

@@ -1,5 +1,19 @@
 #C-SPAN.org plugin for plex media server
-# All images except for cspan logo are free use images from wikimedia commons
+
+# copyright 2009 Billy Joe Poettgen
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 
 #TO DO:
 #	wait for plex fix for live streams
@@ -17,6 +31,7 @@
 # pid= id number of the video to play
 # http://www.c-spanarchives.org/library/includes/templates/library/flash_popup.php?pID=287153-1
 
+# All images except for cspan logo are free use images from wikimedia commons
 
 
 import re, string

@@ -161,6 +161,13 @@ def GetVids(sender, title2, page, path):
 	nextPage = pageXML.xpath("//a[@title=' Next Page ']/@href")
 	if nextPage != []:
 		dir.Append(Function(DirectoryItem(GetVids, title="Next 10 Results"), page=nextPage[0]+"",  path=path, title2=title2))
+	#for search pages
+	elif nextPage == []:
+		pageNumber = pageXML.xpath("//form[@name='next']//input[@name='start']/@value")
+		if pageNumber != []:
+			nextPage = page + "&start=" + str(pageNumber).strip("['']")
+			if nextPage != None:
+				dir.Append(Function(DirectoryItem(GetVids, title="Next 10 Results"), page=nextPage,  path=path, title2=title2))
 	return dir
 
 
@@ -215,7 +222,7 @@ def doSearch(sender, query):
 	searchPage =  searchDate + queryURL
 	searchPaths = "//b//a//@href"
 	dir.Append(Function(DirectoryItem(GetVids, title="Search Results by Date, Newest first"), page=searchPage, path=searchPaths, title2="Search Results"))
-	searchPage = searchURL + queryURL + "&start=0&sort=date&reverse=false"
+	searchPage = searchURL + queryURL + "&sort=date&reverse=false"
 	dir.Append(Function(DirectoryItem(GetVids, title="Search Results by Date, Oldest First"), page=searchPage, path=searchPaths, title2="Search Results"))
 	searchPage = searchURL + queryURL
 	dir.Append(Function(DirectoryItem(GetVids, title="Search Results by Relevancy"), page=searchPage, path=searchPaths, title2="Search Results"))

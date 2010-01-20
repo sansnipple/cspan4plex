@@ -58,22 +58,19 @@ def MainMenu():
 ########################### Live Feeds #######################################################
 def Live(sender):
   dir = MediaContainer(title2='C-SPAN Channel Live Streams', viewGroup='Details')
-  dir.Append(VideoItem('mms://rx-sv-ca13.rbn.com/farm/pull/tx-rbn-sea001:1459/wmtencoder/cspan/cspan/wmlive/cspan1v.asf',
+  dir.Append(VideoItem('http://play.rbn.com/play.asx?url=cspan/cspan/wmlive/cspan1v.asf&amp;proto=mms?mswmext=.asx',
                   title='C-SPAN Live',
-                  thumb='cspan1.jpg',
-                  art='',
+                  thumb=R('cspan1.jpg'),
                   summary="C-SPAN offers gavel to gavel coverage of the U.S. House of Representatives. C-SPAN also offers a variety of public affairs programming including congressional hearings, press briefings from the White House, State Department and Pentagon, campaign and election coverage, and international programming.",
                   ))
-  dir.Append(VideoItem('mms://rx-wes-sea154.rbn.com/farm/pull/tx-rbn-sea004:1459/wmtencoder/cspan/cspan/wmlive/cspan2v.asf',
+  dir.Append(VideoItem('http://play.rbn.com/play.asx?url=cspan/cspan/wmlive/cspan2v.asf&amp;proto=mms?mswmext=.asx',
                   title='C-SPAN 2 Live',
-                  thumb='temp2.jpg',
-                  art='',
+                  thumb=R('temp2.jpg'),
                   summary="C-SPAN 2 offers gavel to gavel coverage of the U.S. Senate. C-SPAN2 also offers a balanced variety of public affairs programming when the Senate is in adjournment, including congressional committee hearings, press briefings, newsmaker speeches & public policy discussions.",
                   ))
-  dir.Append(VideoItem('mms://rx-wes-sea133.rbn.com/farm/pull/tx-rbn-sea007:1459/wmtencoder/cspan/cspan/wmlive/cspan3v.asf',
+  dir.Append(VideoItem('http://play.rbn.com/play.asx?url=cspan/cspan/wmlive/cspan3v.asf&amp;proto=mms?mswmext=.asx',
                   title='C-SPAN 3 Live',
-                  thumb='cspan3.jpg',
-                  art='',
+                  thumb=R('cspan3.jpg'),
                   summary="C-SPAN3 offers history programming and Congressional committee coverage.",
                   ))
 #  dir.Append(TrackItem('http://play.rbn.com/play.asx?url=cspan/cspan/wmlive/cspan4db.asf&proto=mms',

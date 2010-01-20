@@ -16,19 +16,17 @@
 
 
 #TO DO:
-#	wait for plex fix for live streams
-# wait for plex fix for sticky thumbs
+#	caching of live audio stream, paplayer cant deal
 # site config xml - seekbar crap
-# congressional chronicle
-#	better senate photo for cspan2 thumb
 #	more art
 # Better art
-# currently does Not return to menu automatically when video finishes, MUST find fix for this
-# use plex unversal player
+# currently does Not return to menu automatically when video finishes
 
 # direct url for library videos:
 # pid= id number of the video to play
 # http://www.c-spanarchives.org/library/includes/templates/library/flash_popup.php?pID=287153-1
+
+# http://www.plexapp.com/player/player.php?url=rtmp://video.c-spanarchives.org/customplayer&clip=ID/287/287153/287153-1_01
 
 # All images except for cspan logo are free use images from wikimedia commons
 
@@ -48,11 +46,14 @@ CACHE_INTERVAL = 3600
 
 ###################################################################################################
 def Start():
-  Plugin.AddPrefixHandler(CSPAN_PREFIX, MainMenu, 'C-SPAN', 'logo.png', 'capitol.jpg')
+  Plugin.AddPrefixHandler(CSPAN_PREFIX, MainMenu, 'C-SPAN', 'icon-default.png', 'art-default.jpg')
   Plugin.AddViewGroup("Details", viewMode="InfoList", mediaType="items")
   MediaContainer.title1 = 'C-SPAN'
   MediaContainer.content = 'Items'
-  MediaContainer.art = R('capitol.jpg')
+  MediaContainer.art = R('art-default.jpg')
+  DirectoryItem.thumb = R('icon-default.png')
+  InputDirectoryItem.thumb = R('icon-default.png')
+  VideoItem.thumb = R('icon-default')
   HTTP.SetCacheTime(CACHE_INTERVAL)
 
 ###################################################################################################
@@ -63,7 +64,7 @@ def MainMenu():
   dir.Append(Function(DirectoryItem(Library,   title="C-SPAN Video Library", thumb=R('libr.jpg'))))
 # dir.Append(Function(DirectoryItem(Congress,  title="C-SPAN Congressional Chronicle",)))
 # dir.Append(Function(DirectoryItem(Schedule,  title="C-SPAN Broadcast Schedule",)))
-  dir.Append(Function(SearchDirectoryItem(doSearch, title="Search CSPAN Archives",prompt='Enter search query')))
+  dir.Append(Function(InputDirectoryItem(doSearch, title="Search CSPAN Archives",prompt='Enter search query')))
   return dir
 
 ###################################################################################################
@@ -73,26 +74,27 @@ def Live(sender):
   dir = MediaContainer(title2='C-SPAN Channel Live Streams', viewGroup='Details')
   dir.Append(VideoItem('mms://rx-sv-ca13.rbn.com/farm/pull/tx-rbn-sea001:1459/wmtencoder/cspan/cspan/wmlive/cspan1v.asf',
  									title='C-SPAN Live',
- 									thumb=R('cspan1.jpg'),
+ 									thumb='cspan1.jpg',
 									art='',
 									summary="C-SPAN offers gavel to gavel coverage of the U.S. House of Representatives. C-SPAN also offers a variety of public affairs programming including congressional hearings, press briefings from the White House, State Department and Pentagon, campaign and election coverage, and international programming.",
 									))
   dir.Append(VideoItem('mms://rx-wes-sea154.rbn.com/farm/pull/tx-rbn-sea004:1459/wmtencoder/cspan/cspan/wmlive/cspan2v.asf',
 									title='C-SPAN 2 Live',
-									thumb=R('temp2.jpg'),
+									thumb='temp2.jpg',
 									art='',
 									summary="C-SPAN 2 offers gavel to gavel coverage of the U.S. Senate. C-SPAN2 also offers a balanced variety of public affairs programming when the Senate is in adjournment, including congressional committee hearings, press briefings, newsmaker speeches & public policy discussions.",
 									))
   dir.Append(VideoItem('mms://rx-wes-sea133.rbn.com/farm/pull/tx-rbn-sea007:1459/wmtencoder/cspan/cspan/wmlive/cspan3v.asf',
 									title='C-SPAN 3 Live',
-									thumb=R('cspan3.jpg'),
+									thumb='cspan3.jpg',
 									art='',
 									summary="C-SPAN3 offers history programming and Congressional committee coverage.",
 									))
-  dir.Append(TrackItem('http://play.rbn.com/play.asx?url=cspan/cspan/wmlive/cspan4db.asf',
+  dir.Append(TrackItem('http://play.rbn.com/play.asx?url=cspan/cspan/wmlive/cspan4db.asf&proto=mms',
                   title='C-SPAN Radio Live',
                   thumb='',
                   art='',
+									bandwidth=200,
                   summary="C-SPAN Radio offers commercial-free public affairs programming 24 hours a day. You'll hear live coverage from Washington of important congressional hearings, key speeches from national leaders, along with archival recordings of presidential tapes, military memoirs & judicial proceedings from contemporary times and before the advent of television.",
                   ))
 

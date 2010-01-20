@@ -1,4 +1,4 @@
-#C-SPAN.org plugin for plex media server
+# C-SPAN.org plugin for plex media server
 
 # copyright 2009 Billy Joe Poettgen
 # This program is free software: you can redistribute it and/or modify
@@ -14,19 +14,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
-#TO DO:
-# caching of live audio stream, paplayer cant deal
-# site config xml - seekbar crap
-# more art
-# Better art
-# currently does Not return to menu automatically when video finishes
-
-# direct url for library videos:
-# pid= id number of the video to play
-# http://www.c-spanarchives.org/library/includes/templates/library/flash_popup.php?pID=287153-1
-
-# http://www.plexapp.com/player/player.php?url=rtmp://video.c-spanarchives.org/customplayer&clip=ID/287/287153/287153-1_01
 
 # All images except for cspan logo are free use images from wikimedia commons
 
@@ -62,8 +49,7 @@ def MainMenu():
   
   dir.Append(Function(DirectoryItem(Live,      title="C-SPAN Channel Live Sreams",)))
   dir.Append(Function(DirectoryItem(Library,   title="C-SPAN Video Library", thumb=R('libr.jpg'))))
-# dir.Append(Function(DirectoryItem(Congress,  title="C-SPAN Congressional Chronicle",)))
-# dir.Append(Function(DirectoryItem(Schedule,  title="C-SPAN Broadcast Schedule",)))
+
   dir.Append(Function(InputDirectoryItem(doSearch, title="Search CSPAN Archives",prompt='Enter search query')))
   return dir
 
@@ -231,22 +217,4 @@ def doSearch(sender, query):
   
   return dir
 
-########################### End Library
-########################### Schedule
 
-def Schedule(sender):
-  dir = MediaContainer(title2='Broadcast Schedule',)
-  # placeholder for schedule
-  
-  return dir
-
-########################### End Schedule
-########################### Congress
-
-def Congress(sender):
-  dir = MediaContainer(title2='Congressional Chronicle',)
-  # placeholder for congressional chronicle
-  
-  return dir
-
-########################### End Congress

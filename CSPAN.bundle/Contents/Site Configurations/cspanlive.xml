@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site site="http://www.c-span.org/flvPop.aspx*"
+		plugin="http://www.c-span.org/cspanPlayer.swf*"
+		initialState="playing"
+		version="1.0">
+	<crop x="0" y="0" width="320" height="240" />
+
+	<!-- PLAYING -->
+	<state name="playing">
+	 
+	</state>
+
+
+</site>

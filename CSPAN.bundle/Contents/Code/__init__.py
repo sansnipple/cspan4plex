@@ -58,17 +58,17 @@ def MainMenu():
 ########################### Live Feeds #######################################################
 def Live(sender):
   dir = MediaContainer(title2='C-SPAN Channel Live Streams', viewGroup='Details')
-  dir.Append(VideoItem('http://play.rbn.com/play.asx?url=cspan/cspan/wmlive/cspan1v.asf&amp;proto=mms?mswmext=.asx',
+  dir.Append(WebVideoItem('http://www.c-span.org/flvPop.aspx?src=cspan1&live=C&pop=Y&remote=N',
                   title='C-SPAN Live',
                   thumb=R('cspan1.jpg'),
                   summary="C-SPAN offers gavel to gavel coverage of the U.S. House of Representatives. C-SPAN also offers a variety of public affairs programming including congressional hearings, press briefings from the White House, State Department and Pentagon, campaign and election coverage, and international programming.",
                   ))
-  dir.Append(VideoItem('http://play.rbn.com/play.asx?url=cspan/cspan/wmlive/cspan2v.asf&amp;proto=mms?mswmext=.asx',
+  dir.Append(WebVideoItem('http://www.c-span.org/flvPop.aspx?src=cspan2&live=C&pop=Y&remote=N',
                   title='C-SPAN 2 Live',
                   thumb=R('temp2.jpg'),
                   summary="C-SPAN 2 offers gavel to gavel coverage of the U.S. Senate. C-SPAN2 also offers a balanced variety of public affairs programming when the Senate is in adjournment, including congressional committee hearings, press briefings, newsmaker speeches & public policy discussions.",
                   ))
-  dir.Append(VideoItem('http://play.rbn.com/play.asx?url=cspan/cspan/wmlive/cspan3v.asf&amp;proto=mms?mswmext=.asx',
+  dir.Append(WebVideoItem('http://www.c-span.org/flvPop.aspx?src=cspan3&live=C&pop=Y&remote=N',
                   title='C-SPAN 3 Live',
                   thumb=R('cspan3.jpg'),
                   summary="C-SPAN3 offers history programming and Congressional committee coverage.",
@@ -76,8 +76,6 @@ def Live(sender):
 #  dir.Append(TrackItem('http://play.rbn.com/play.asx?url=cspan/cspan/wmlive/cspan4db.asf&proto=mms',
 #                  title='C-SPAN Radio Live',
 #                  thumb='',
-#                  art='',
-#                 bandwidth=200,
 #                  summary="C-SPAN Radio offers commercial-free public affairs programming 24 hours a day. You'll hear live coverage from Washington of important congressional hearings, key speeches from national leaders, along with archival recordings of presidential tapes, military memoirs & judicial proceedings from contemporary times and before the advent of television.",
 #                  ))
 

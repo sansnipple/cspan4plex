@@ -51,6 +51,7 @@ def MainMenu():
   dir.Append(Function(DirectoryItem(Library,   title="C-SPAN Video Library", thumb=R('libr.jpg'))))
 
   dir.Append(Function(InputDirectoryItem(doSearch, title="Search CSPAN Archives",prompt='Enter search query')))
+  dir.Append(WebVideoItem("http://plexapp.com/player/player.php?url=rtmp://video.c-spanarchives.org/fastplay&clip[]=mp4:full/2009/12/08/20091208130000003.mp4&start[]=2063&duration[]=1547&clip[]=mp4:full/2009/12/08/20091208140000003.mp4&start[]=10&duration[]=3600&clip[]=mp4:full/2009/12/08/20091208150000003.mp4&start[]=10&duration[]=3600&clip[]=mp4:full/2009/12/08/20091208160000003.mp4&start[]=10&duration[]=3600&clip[]=mp4:full/2009/12/08/20091208170000003.mp4&start[]=10&duration[]=1370", title="Test"))
   return dir
 
 ###################################################################################################
@@ -212,4 +213,17 @@ def doSearch(sender, query):
   
   return dir
 
+def buildVideo(sender):
+  
+  url="http://www.c-spanvideo.org/flashXml/216487&amp;style=inline"
+  page = XML.ElementFromURL(url, errors='ignore')
+  finalURL = "http://plexapp.com/player/player.php?url=" + "rtmp://video.c-spanarchives.org/fastplay"
+  for i in range(len(page.xpath("//file"))):
+    clip = page.xpath("//file[%i]/string[@name='path']/text()" % (i+1))[0]
+    offset = str(page.xpath("//file[%i]/number[@name='offset']/text()" % (i+1))[0])
+    length = str(page.xpath("//file[%i]/number[@name='length']/text()" % (i+1))[0])
+    finalURL = finalURL + "&clip[]=" + clip + "&start[]=" + offset + "&duration[]=" + length
+  Log(finalURL)
+  
+  return Redirect(finalURL)
 

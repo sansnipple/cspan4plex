@@ -220,10 +220,9 @@ def buildVideo():
   finalURL = "http://www.plexapp.com/player/player.php?url=" + "rtmp://video.c-spanarchives.org/fastplay"
   for i in range(len(page.xpath("//file"))):
     clip = page.xpath("//file[%i]/string[@name='path']/text()" % (i+1))[0]
-    offset = str(page.xpath("//file[%i]/number[@name='offset']/text()" % (i+1))[0])
-    length = str(page.xpath("//file[%i]/number[@name='length']/text()" % (i+1))[0])
+    offset = str(int(page.xpath("//file[%i]/number[@name='offset']/text()" % (i+1))[0])-2)
+    length = str(int(page.xpath("//file[%i]/number[@name='length']/text()" % (i+1))[0]))
     finalURL = finalURL + "&clip[]=" + clip + "&start[]=" + offset + "&duration[]=" + length
   Log(finalURL)
   
   return WebVideoItem(finalURL, title="Test")
-

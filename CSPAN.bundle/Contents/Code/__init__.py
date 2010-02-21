@@ -40,7 +40,8 @@ def Start():
   MediaContainer.art = R('art-default.jpg')
   DirectoryItem.thumb = R('icon-default.png')
   InputDirectoryItem.thumb = R('icon-default.png')
-  VideoItem.thumb = R('icon-default')
+  VideoItem.thumb = R('icon-default.png')
+  WebVideoItem.thumb = R('icon-default.png')
   HTTP.SetCacheTime(CACHE_INTERVAL)
 
 ###################################################################################################
@@ -52,6 +53,7 @@ def MainMenu():
 
   dir.Append(Function(InputDirectoryItem(doSearch, title="Search CSPAN Archives",prompt='Enter search query')))
   dir.Append(buildVideo())
+  
   return dir
 
 ###################################################################################################
@@ -224,5 +226,10 @@ def buildVideo():
     length = str(int(page.xpath("//file[%i]/number[@name='length']/text()" % (i+1))[0]))
     finalURL = finalURL + "&clip[]=" + clip + "&start[]=" + offset + "&duration[]=" + length
   Log(finalURL)
-  
-  return WebVideoItem(finalURL, title="Test")
+  title = page.xpath("//media-link/string[@name='title']/text()")[0]
+  summary = page.xpath("//media-link/string[@name='detail']/text()")[0]
+  thumbLink = str(page.xpath("//media-link/string[@name='poster']/text()")[0])
+  return WebVideoItem(finalURL, title=title, summary=summary, thumb=Function(getThumb, url=thumbLink))
+
+def getThumb(url, sender=None):
+  return DataObject(HTTP.Request(url), 'image/png')

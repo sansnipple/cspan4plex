@@ -51,8 +51,8 @@ def MainMenu():
   dir.Append(Function(DirectoryItem(Live,      title="C-SPAN Channel Live Sreams",)))
   dir.Append(Function(DirectoryItem(Library,   title="C-SPAN Video Library", thumb=R('libr.jpg'))))
 
-  dir.Append(Function(InputDirectoryItem(doSearch, title="Search CSPAN Archives",prompt='Enter search query')))
-  dir.Append(buildVideo(id="216487"))
+#  dir.Append(Function(InputDirectoryItem(doSearch, title="Search CSPAN Archives",prompt='Enter search query')))
+  dir.Append(buildVideo("216487"))
   
   return dir
 
@@ -88,17 +88,31 @@ def Live(sender):
 ########################### Video Library ################################################
 def Library(sender):
   dir = MediaContainer(title2='Video Library',)
-  dir.Append(Function(DirectoryItem(MostWatched,  title='Most Watched Programs',)))
-  dir.Append(Function(DirectoryItem(GetVids,      title='Featured Programs'), page=frontURL, path="id('featuredContent')/table/tbody/tr/td[2]/div[2]/a/@href", title2='Featured Programs'))
-  dir.Append(Function(DirectoryItem(Categories,   title='Video Categories',)))
-  dir.Append(Function(DirectoryItem(Series,       title='Video Series',)))
-  dir.Append(Function(DirectoryItem(GetVids,      title='Obama White House', thumb=R('obama1.jpg')), page=frontURL, path="id('recentCampaign2008Content')//div/div/div[2]/a//@href", title2='Obama White House'))
-  dir.Append(Function(DirectoryItem(GetVids,      title='Recent Congressional Committees', thumb=R('committee1.jpg')), page=frontURL, path="id('recentCommitteesContent')//div/div/div[2]/a//@href", title2="Recent Congressional Committees"))
-  dir.Append(Function(DirectoryItem(GetVids,      title='Recent BookTV Programs', thumb=R('book1.jpg')), page=frontURL, path="id('recentBookTVContent')//div/div/div[2]/a/@href", title2="Recent BookTV"))
+#  dir.Append(Function(DirectoryItem(MostWatched,  title='Most Watched Programs',)))
+  dir.Append(Function(DirectoryItem(featured,     title='Featured Programs')))
+#  dir.Append(Function(DirectoryItem(Categories,   title='Video Categories',)))
+#  dir.Append(Function(DirectoryItem(Series,       title='Video Series',)))
+#  dir.Append(Function(DirectoryItem(GetVids,      title='Obama White House', thumb=R('obama1.jpg')), page=frontURL, path="id('recentCampaign2008Content')//div/div/div[2]/a//@href", title2='Obama White House'))
+#  dir.Append(Function(DirectoryItem(GetVids,      title='Recent Congressional Committees', thumb=R('committee1.jpg')), page=frontURL, path="id('recentCommitteesContent')//div/div/div[2]/a//@href", title2="Recent Congressional Committees"))
+#  dir.Append(Function(DirectoryItem(GetVids,      title='Recent BookTV Programs', thumb=R('book1.jpg')), page=frontURL, path="id('recentBookTVContent')//div/div/div[2]/a/@href", title2="Recent BookTV"))
   return dir
 
 ###########################################
 
+
+def featured(sender):
+  dir = MediaContainer(title2='Featured Programs')
+  url = "http://www.c-spanvideo.org/browse"
+  page = XML.ElementFromURL(url, isHTML=True, errors="ignore")
+  links = page.xpath("//div[@id='featuredPrograms']//a[@class='play']/@href")
+  for link in links:
+    pID = link.replace('/program/','')
+    dir.Append(buildVideo(pID))
+  
+  return dir
+
+
+"""
 def GetPID(url):
   
   page = XML.ElementFromURL(url, isHTML=True, errors="ignore")
@@ -214,10 +228,10 @@ def doSearch(sender, query):
   dir.Append(Function(DirectoryItem(GetVids, title="Search Results by Relevancy"), page=searchPage, path=searchPaths, title2="Search Results"))
   
   return dir
-
-def buildVideo(id=""):
+"""
+def buildVideo(pID=""):
   
-  url="http://www.c-spanvideo.org/flashXml/" + id + "&amp;style=inline"
+  url="http://www.c-spanvideo.org/flashXml/" + pID
   page = XML.ElementFromURL(url, errors='ignore')
   finalURL = "http://www.plexapp.com/player/player.php?url=" + "rtmp://video.c-spanarchives.org/fastplay"
   for i in range(len(page.xpath("//file"))):

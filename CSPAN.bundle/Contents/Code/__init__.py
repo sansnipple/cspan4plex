@@ -52,7 +52,7 @@ def MainMenu():
   dir.Append(Function(DirectoryItem(Library,   title="C-SPAN Video Library", thumb=R('libr.jpg'))))
 
   dir.Append(Function(InputDirectoryItem(doSearch, title="Search CSPAN Archives",prompt='Enter search query')))
-  dir.Append(buildVideo())
+  dir.Append(buildVideo(id="216487"))
   
   return dir
 
@@ -215,9 +215,9 @@ def doSearch(sender, query):
   
   return dir
 
-def buildVideo():
+def buildVideo(id=""):
   
-  url="http://www.c-spanvideo.org/flashXml/216487&amp;style=inline"
+  url="http://www.c-spanvideo.org/flashXml/" + id + "&amp;style=inline"
   page = XML.ElementFromURL(url, errors='ignore')
   finalURL = "http://www.plexapp.com/player/player.php?url=" + "rtmp://video.c-spanarchives.org/fastplay"
   for i in range(len(page.xpath("//file"))):
